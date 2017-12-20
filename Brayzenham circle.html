@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Circle</title>
+    </head>
+    <body>
+        <canvas id = "crcl" width = "1000" height = "1000" style = "border: 1px solid black"></canvas>
+        <script>
+            function print_circle(event)
+            {
+                var x_c = event.offsetX;
+                var y_c = event.offsetY;
+                var x = x_c;
+                var y = y_c + r;
+                var delta = 3 - 2*y;
+                while((x-x_c)<=(y-y_c))
+                {
+                    var x_ = x - x_c;
+                    var y_ = y - y_c;
+                    if (((x_c+x_) >= 0) && ((x_c+x_) < can.width) && ((y_c+y_)>=0) && ((y_c+y_)<can.height)) ctx.fillRect(x_c + x_, y_c + y_, 1, 1);
+                    if (((x_c+y_) >= 0) && ((x_c+y_) < can.width) && ((y_c+x_)>=0) && ((y_c+x_)<can.height)) ctx.fillRect(x_c + y_, y_c + x_, 1, 1);
+                    if (((x_c+y_) >= 0) && ((x_c+y_) < can.width) && ((y_c-x_)>=0) && ((y_c-x_)<can.height)) ctx.fillRect(x_c + y_, y_c - x_, 1, 1);
+                    if (((x_c+x_) >= 0) && ((x_c+x_) < can.width) && ((y_c-y_)>=0) && ((y_c-y_)<can.height)) ctx.fillRect(x_c + x_, y_c - y_, 1, 1);
+                    if (((x_c-x_) >= 0) && ((x_c-x_) < can.width) && ((y_c-y_)>=0) && ((y_c-y_)<can.height)) ctx.fillRect(x_c - x_, y_c - y_, 1, 1);
+                    if (((x_c-y_) >= 0) && ((x_c-y_) < can.width) && ((y_c-x_)>=0) && ((y_c-x_)<can.height)) ctx.fillRect(x_c - y_, y_c - x_, 1, 1);
+                    if (((x_c-y_) >= 0) && ((x_c-y_) < can.width) && ((y_c+x_)>=0) && ((y_c+x_)<can.height)) ctx.fillRect(x_c - y_, y_c + x_, 1, 1);
+                    if (((x_c-x_) >= 0) && ((x_c-x_) < can.width) && ((y_c+y_)>=0) && ((y_c+y_)<can.height)) ctx.fillRect(x_c - x_, y_c + y_, 1, 1);
+                    if(delta<0) delta+=4*(x-x_c)+6;
+                    else
+                    {
+                         delta+=4*(x-x_c-y+y_c)+10;
+                         --y;
+                    }
+                    ++x;
+                }
+                can.removeEventListener('click', print_circle);
+            }
+        </script>
+        <script>
+            var can = document.getElementById("crcl");
+            var ctx = can.getContext("2d");
+            var r = parseInt(prompt("Enter radius"));
+            can.addEventListener('click', print_circle);
+        </script>
+    </body>
+</html>
